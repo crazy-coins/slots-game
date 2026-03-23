@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slots-game 原创游戏 定制素材 ab站 包链接  出海</title>
+    <style>
+        /* 重置默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* 瀑布流容器核心样式 */
+        .waterfall-container {
+            /* 瀑布流列数：根据屏幕宽度自适应 */
+            column-count: 1;
+            column-gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 响应式调整列数 */
+        @media (min-width: 600px) {
+            .waterfall-container {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .waterfall-container {
+                column-count: 3;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .waterfall-container {
+                column-count: 4;
+            }
+        }
+
+        /* 图片卡片样式 */
+        .img-card {
+            break-inside: avoid; /* 防止卡片被列分割 */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background-color: white;
+        }
+
+        .img-card:hover {
+            transform: translateY(-5px); /* 鼠标悬浮上移效果 */
+        }
+
+        /* 图片样式 */
+        .game-img {
+            width: 100%;
+            display: block; /* 去除图片底部空白 */
+            object-fit: cover; /* 保持比例，裁剪多余部分 */
+            height: auto; /* 自适应高度 */
+        }
+
+        /* 加载提示 */
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        .no-more {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>slots-game 原创游戏 定制素材 ab站 包链接  出海  777  slots</h1>
+    <div class="waterfall-container" id="waterfallContainer"></div>
+    <div class="loading" id="loading"></div>
+    <div class="no-more" id="noMore" style="display: none;"></div>
+
+    <script>
+        // 获取DOM元素
+        const container = document.getElementById('waterfallContainer');
+        const loading = document.getElementById('loading');
+        const noMore = document.getElementById('noMore');
+        
+        // 起始图片编号
+        let imgNumber = 1;
+        // 是否正在加载（防止重复请求）
+        let isLoading = false;
+
+        // 加载图片的函数
+        async function loadImage() {
+            if (isLoading) return;
+            isLoading = true;
+
+            try {
+                // 创建图片对象，先检测是否存在
+                const img = new Image();
+                img.src = `${imgNumber}.png`;
+                
+                // 图片加载成功
+                img.onload = function() {
+                    // 创建图片卡片
+                    const card = document.createElement('div');
+                    card.className = 'img-card';
+                    
+                    // 创建图片元素
+                    const imgElement = document.createElement('img');
+                    imgElement.className = 'game-img';
+                    imgElement.src = img.src;
+                    imgElement.alt = `小游戏截图 ${imgNumber}`;
+                    // 懒加载（现代浏览器支持）
+                    imgElement.loading = 'lazy';
+
+                    // 组装卡片并添加到容器
+                    card.appendChild(imgElement);
+                    container.appendChild(card);
+
+                    // 编号递增，继续加载下一张
+                    imgNumber++;
+                    isLoading = false;
+                    loadImage();
+                };
+
+                // 图片加载失败（说明没有更多图片了）
+                img.onerror = function() {
+                    loading.style.display = 'none';
+                    noMore.style.display = 'block';
+                    isLoading = false;
+                };
+            } catch (error) {
+                console.error('加载图片出错:', error);
+                loading.style.display = 'none';
+                noMore.style.display = 'block';
+                isLoading = false;
+            }
+        }
+
+        // 页面加载完成后开始加载图片
+        window.onload = function() {
+            loadImage();
+        };
+    </script>
+</body>
+</html>
